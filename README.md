@@ -2,7 +2,7 @@
 flask run
 rvce@1234
 
-[![RVCE Placement](img/landing.gif)](https://www.youtube.com/watch?v=wWDMmJrxVUk)
+[![RVCE Placement](img/Untitled.gif)](https://www.youtube.com/watch?v=wWDMmJrxVUk)
 
 reviews feature
 css
