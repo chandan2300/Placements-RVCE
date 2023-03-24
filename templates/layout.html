@@ -1,0 +1,126 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}" />
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+        <script src="{{ url_for('static', filename='jquery-3.6.3.min.js')}}"></script>
+
+        <link href="https://fonts.googleapis.com/css?family=Heebo:400,500,700|Fira+Sans:600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='landing.css')}}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css')}}" />
+        <script src="https://unpkg.com/animejs@2.2.0/anime.min.js"></script>
+        <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+        <!-- Other links (fonts, chartjs etc) -->
+        {% block head %} {% endblock %}
+
+    <title>{% block title %} {% endblock %}</title>
+    </head>
+
+<body >
+    <header class="site-header">
+
+        <div class="container">
+            <div class="site-header-inner">
+                <div class="brand header-brand" style="width: 100%;">
+                    <div class="topnav" style="margin-top: 15px;">
+                        <a href="/" style="padding-top: 5px;"><img src="{{ url_for('static', filename='rvceLogo.png')}}" style="width: 75px;"></img></a>
+                        <div class="topnav-right" style="margin-left: 20px;">
+                          <a href="/" style="padding: 23px 0 23px 50px;" ><p class="hover-underline-animation">Home</p></a>
+                          <a href="/login" style="padding: 23px 0 23px 50px;"><p class="hover-underline-animation">Login</p></a>
+                          <a href="/logout" style="padding: 23px 0 23px 50px;"><p class="hover-underline-animation">Logout</p></a>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        
+    </header>
+
+    <main>
+        {% block main %} {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer-inner has-top-divider">
+                <div class="brand footer-brand">
+                    <a href="/">
+						<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+							<title>April</title>
+							<defs>
+								<linearGradient x1="114.674%" y1="39.507%" x2="-52.998%" y2="39.507%" id="logo-footer-a">
+									<stop stop-color="#8D92FA" offset="0%"/>
+									<stop stop-color="#8D92FA" stop-opacity="0" offset="100%"/>
+								</linearGradient>
+								<linearGradient x1="93.05%" y1="19.767%" x2="15.034%" y2="85.765%" id="logo-footer-b">
+									<stop stop-color="#FF3058" offset="0%"/>
+									<stop stop-color="#FF6381" offset="100%"/>
+								</linearGradient>
+								<linearGradient x1="32.716%" y1="-20.176%" x2="32.716%" y2="148.747%" id="logo-footer-c">
+									<stop stop-color="#FF97AA" offset="0%"/>
+									<stop stop-color="#FF97AA" stop-opacity="0" offset="100%"/>
+								</linearGradient>
+							</defs>
+							<a href="/"><img src="{{ url_for('static', filename='rvceLogo.png')}}" style="width: 50px;"></img></a>
+						</svg>
+                    </a>
+                </div>
+                <ul class="footer-links list-reset">
+                    <li>
+                        <a href="mailto:placement@rvce.edu.in">Contact</a>
+                    </li>
+                    <li>
+                        <a href="https://www.rvce.edu.in/">About us</a>
+                    </li>
+                    <li>
+                        <a href="https://www.rvce.edu.in/">FAQ's</a>
+                    </li>
+                    <li>
+                        <a href="https://www.rvce.edu.in/">Support</a>
+                    </li>
+                </ul>
+                <ul class="footer-social-links list-reset">
+                    <li>
+                        <a href="https://www.instagram.com/rvcollegeofengineering/">
+                            <span class="screen-reader-text">Instagram</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFF" class="bi bi-instagram" viewBox="0 0 16 16"> 
+                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/> 
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/RVCEngineering/">
+                            <span class="screen-reader-text">Facebook</span>
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z" fill="#FFF"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/rvce_official">
+                            <span class="screen-reader-text">Twitter</span>
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z" fill="#FFF"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.google.com/search?q=rvce">
+                            <span class="screen-reader-text">Google</span>
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.9 7v2.4H12c-.2 1-1.2 3-4 3-2.4 0-4.3-2-4.3-4.4 0-2.4 2-4.4 4.3-4.4 1.4 0 2.3.6 2.8 1.1l1.9-1.8C11.5 1.7 9.9 1 8 1 4.1 1 1 4.1 1 8s3.1 7 7 7c4 0 6.7-2.8 6.7-6.8 0-.5 0-.8-.1-1.2H7.9z" fill="#FFF"/>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer-copyright">&copy; 2023 February, All rights reserved</div>
+            </div>
+        </div>
+    </footer>
+    <script> !function(){const e=document.documentElement;if(e.classList.remove("no-js"),e.classList.add("js"),document.body.classList.contains("has-animations")){(window.sr=ScrollReveal()).reveal(".feature, .testimonial",{duration:600,distance:"50px",easing:"cubic-bezier(0.5, -0.01, 0, 1.005)",origin:"bottom",interval:100});const a=anime.timeline({autoplay:!1}),t=document.querySelector(".stroke-animation");t.setAttribute("stroke-dashoffset",anime.setDashoffset(t)),a.add({targets:".stroke-animation",strokeDashoffset:{value:0,duration:2e3,easing:"easeInOutQuart"},strokeWidth:{value:[0,2],duration:2e3,easing:"easeOutCubic"},strokeOpacity:{value:[1,0],duration:1e3,easing:"easeOutCubic",delay:1e3},fillOpacity:{value:[0,1],duration:500,easing:"easeOutCubic",delay:1300}}).add({targets:".fadeup-animation",offset:1300,translateY:{value:[100,0],duration:1500,easing:"easeOutElastic",delay:function(e,a){return 150*a}},opacity:{value:[0,1],duration:200,easing:"linear",delay:function(e,a){return 150*a}}}).add({targets:".fadeleft-animation",offset:1300,translateX:{value:[40,0],duration:400,easing:"easeOutCubic",delay:function(e,a){return 100*a}},opacity:{value:[0,1],duration:200,easing:"linear",delay:function(e,a){return 100*a}}}),e.classList.add("anime-ready"),a.play()}}();</script>
+    {% block script %} {% endblock %}
+</body>
+</html>

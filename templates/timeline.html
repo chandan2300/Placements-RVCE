@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+
+    {% block head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://cdn.lineicons.com/1.0.1/LineIcons.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600&amp;display=swap'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='offer.css')}}" type = "text/css">    
+    <link rel="stylesheet" href="{{ url_for('static', filename='timeline.css')}}" type = "text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mask.css')}}" type = "text/css">
+    {% endblock %}
+
+
+    {% block title %}
+        Timeline
+    {% endblock %}
+
+    {% block main %}  
+
+    <h1 class="black-lives-matter" style="text-align: center;">Placement / Internship Drive Timeline</h1>    
+<div class="timeline"> 
+
+  {% for event in events %}
+  <div class="timeline__event  animated fadeInUp">
+    <div class="timeline__event__icon" style="background-image: url({{event.logo_url}});">
+    </div>
+    <div class="timeline__event__date">
+      {{event['date']}}
+    </div>
+    <div class="timeline__event__content ">
+      <div class="timeline__event__title">
+        <a href="{{ event.website }}" style="text-decoration: none; color: currentColor; font-size: 25px;">{{event['companyName']}}</a> 
+      </div>
+      <div class="timeline__event__description">
+        <p align="justify" style="padding-top: 5px;">
+          {{event['summary']}}
+        </p>
+        <br>
+        <ul style="line-height: 18px;">
+            <li><span><img src="../static/pin.png" width="10px" alt="Location"></span>  {{event['location']}}</li>
+            <li>Full time Employees : {{event['employees']}}</li>
+            <li>Sector : {{event['sector']}}  <span><img src="../static/black-circle.png" width="10px" style="padding: 2px;" alt="Separator"></span>  {{event['industry']}}</li>
+        </ul>
+        <div class="btn-section" style="display: flex;  margin-top: 10px; align-items: center;">
+            <div class="info" style="float: left;">
+                <ul style="line-height: 18px;">
+                    <li>Offer Type : {{event['offertype']}}</li>
+                    <li>Semester :  {{event['semester']}}</li>
+                    <li>Branches :  {{event['branches']}}</li>
+                    <li>Stipend :  {{event['stipendCtc']}}</li>
+                </ul>  
+            </div>
+            <div class="button-container-1" style="float: right;">
+                <span class="mas">Register</span>
+              <a style="text-decoration: none; color: currentColor;" href="https://www.google.com"><button class='work' type="button" name="Hover" style="font-size: 15px;">Register</button></a>
+            </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+  {% if user %}
+  <section class="offer-form">
+    <div class="chart-heading-offer" style="margin-top: -10px;">Add an Event</div>
+
+    <div class="container1">
+      <form id="survey-form1" action="/timeline" method="POST">
+        <div class="input-box1">
+          <label for="companyName" class="title-label1" >Company Name</label>
+          <input type="text" id="companyName" class="input-text1" name="companyName" placeholder="Apple..." >
+        </div>
+        <div class="input-box1">
+          <label for="date" class="title-label1" >Date</label>
+          <input type="date" id="date" class="input-text1" name="date" placeholder="dd-mm-yyyy" >
+        </div>
+        <div class="input-box1">
+            <label for="companySymbol" class="title-label1" >Company Symbol</label>
+            <input type="text" id="companySymbol" class="input-text1" name="companySymbol" placeholder="AAPL" >
+        </div>
+        <div class="input-box1">
+            <label for="offerType" class="title-label1" >Offer Type</label>
+            <input type="text" id="offerType" class="input-text1" name="offerType" placeholder="Internship" >
+        </div>
+        <div class="input-box1">
+            <label for="semester" class="title-label1" >Semester</label>
+            <input type="text" id="semester" class="input-text1" name="semester" placeholder="_ sem" >
+        </div>
+        <div class="input-box1">
+            <label for="branches" class="title-label1" >Branches</label>
+            <input type="text" id="branches" class="input-text1" name="branches" placeholder="CSE, ISE ..." >
+        </div>
+        <div class="input-box1">
+            <label for="stipendCtc" class="title-label1" >Stipend / CTC</label>
+            <input type="text" id="stipendCtc" class="input-text1" name="stipendCtc" placeholder="32 ctc" >
+        </div>
+        <input type="submit" id="submit" value="Submit" class="submit-button">
+      </form>
+    </div>
+  </section>
+  {% endif %}
+<script>
+    function getDarkColor() {
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += Math.floor(Math.random() * 10);
+    }
+    return color;
+}
+    const timelineEvents = document.querySelectorAll('.timeline__event');
+    let tcounter = 0;
+    timelineEvents.forEach((event) => {
+        event.classList.add('delay-' + (tcounter%6) + 's');
+        event.classList.add('timeline__event--type' + (tcounter%2)+1);
+        const dateDiv = event.querySelector('.timeline__event__date');
+        const titleDiv = event.querySelector('.timeline__event__title');
+        const btn = event.querySelector('.work');
+        const info = event.querySelector('.info');
+        let color = getDarkColor();
+        dateDiv.style.backgroundColor = color;
+        titleDiv.style.color = color;
+        info.style.color = color;
+        dateDiv.style.color = "white";
+        var date = new Date(dateDiv.innerHTML);
+        var currentDate = new Date();
+        console.log(btn);
+        if (date.getTime() < currentDate.getTime()){
+          btn.disabled = true;
+          btn.innerHTML = "Ended";
+          event.querySelector('.mas').innerHTML = "Ended";
+        }
+        tcounter++;
+
+
+    });
+</script>
+
+    {% endblock %}
+
+    {% block script %}
+    {% endblock %}

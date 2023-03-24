@@ -1,0 +1,578 @@
+{% extends "layout.html" %} {% block head %}
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css"
+/>
+<link rel="stylesheet" type="text/css" href="static/table.css" />
+<script
+    type="text/javascript"
+    charset="utf8"
+    src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"
+></script>
+<script src="{{url_for('static', filename='chart.min.js')}}"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+/><link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+/>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='chrt.css')}}"
+    type="text/css"
+/>
+{% endblock %} {% block title %} Statistics {% endblock %} {% block main %}
+<div style="padding: 0 200px 30px; margin-top: -25px">
+    {% if user %}
+    <h3 class="m-2" style="color: #c7c7c7">
+        <a href="{{ url_for('dashboard')}}"
+            ><button
+                class="btn-menu"
+                style="font-size: 20px; padding: 15px 30px"
+            >
+                Dashboard
+            </button></a
+        >
+        <a href="{{ url_for('statistics')}}"
+            ><button
+                class="btn-menu"
+                style="font-size: 20px; padding: 15px 30px"
+            >
+                Statistics
+            </button></a
+        >
+        {% if user['name'] == 'Placement Head' %}
+        <a href="{{ url_for('register')}}"
+            ><button
+                class="btn-menu"
+                style="font-size: 20px; padding: 15px 30px"
+            >
+                Register
+            </button></a
+        >
+        {% endif %}
+        <span style="float: right; padding-top: 6px"> {{user['name']}} </span>
+    </h3>
+    {% endif %}
+</div>
+<div class="numofoffers">
+    <h1 class="black-lives-matter" style="margin-top: -30px">
+        No. of offers vs Branch
+    </h1>
+    <div class="chartBox">
+        <canvas id="myChart"></canvas>
+    </div>
+    <select name="toggle" id="selectBox" class="chart-toggle">
+        <option value="1">All Offers</option>
+        <option value="2">Open Dream</option>
+        <option value="3">Dream</option>
+        <option value="4">Mass</option>
+    </select>
+</div>
+
+<div class="placement-stat">
+    <div class="chart-heading-pstat" style="margin-top: -20px">
+        Placement Statistics {{tableYear}}
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Department</th>
+                <th>Offers</th>
+                <th>Min ctc</th>
+                <th>Max ctc</th>
+                <th>Avg ctc</th>
+                <th>Median ctc</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_data %}
+            <tr>
+                <th>{{ row[0] }}</th>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="topRecruiters">
+    <h1 class="black-lives-matter1" style="margin-top: -30px">
+        Top Recruiters
+    </h1>
+    <div class="recruitChartBox">
+        <canvas id="myRecruitChart"></canvas>
+    </div>
+    <select name="branchToggle" id="selectBranchBox" class="chart-toggle1">
+        <option value="CSE">CSE</option>
+        <option value="ASE">ASE</option>
+        <option value="BT">BT</option>
+        <option value="CH">CH</option>
+        <option value="CV">CV</option>
+        <option value="ECE">ECE</option>
+        <option value="EEE">EEE</option>
+        <option value="EIE">EIE</option>
+        <option value="ETE">ETE</option>
+        <option value="IEM">IEM</option>
+        <option value="ISE">ISE</option>
+        <option value="ME">ME</option>
+    </select>
+    <select name="Offertoggle" id="selectBox2" class="chart-toggle1">
+        <option value="1">All Offers</option>
+        <option value="2">Open Dream</option>
+        <option value="3">Dream</option>
+        <option value="4">Mass</option>
+    </select>
+</div>
+
+<div class="lineChartDiv">
+    <h1 class="black-lives-matter1" style="margin-top: 30px">
+        Placement Offers Trend
+    </h1>
+    <div class="lineChartBox">
+        <canvas id="myLineChart"></canvas>
+    </div>
+</div>
+
+<div class="num_of_students">
+    <h1 class="black-lives-matter1" style="margin-top: 30px">
+        Number of students placed
+    </h1>
+    <div class="piechartBox">
+        <canvas id="myPieChart"></canvas>
+    </div>
+</div>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+<script>
+
+
+    // Num of offers
+    let dept_wise_offers = {{dept_offers|tojson}};
+    let deptLabelsOffers = [], num_of_offers_per_dept =[];
+    dept_wise_offers.map((item)=>{
+        deptLabelsOffers.push(item[0]);
+        num_of_offers_per_dept.push(item[1]);
+    })
+
+    // Top Recruiters
+    let companies = {{top_companies|tojson}};
+    let companyLabels = [], num_of_offers_per_company =[];
+    companies.map((item)=>{
+        companyLabels.push(item[0]);
+        num_of_offers_per_company.push(item[1]);
+    })
+
+    // Line Chart Data
+    lineChartData = {{lineChartData|tojson}};
+
+
+
+    // Pie Chart
+    let students = {{num_of_students|tojson}};
+    let deptLabelsStudents = [], num_of_students_per_dept =[];
+    students.map((item)=>{
+        deptLabelsStudents.push(item[0]);
+        num_of_students_per_dept.push(item[1]);
+    })
+
+
+    console.log(deptLabelsOffers);
+    console.log(num_of_offers_per_dept);
+    console.log(deptLabelsStudents);
+    console.log(num_of_students_per_dept);
+    console.log(companyLabels);
+    console.log(num_of_offers_per_company);
+    console.log(lineChartData);
+
+
+    function colorGen(a,o){
+        var backgroudColors = [];
+        var backgroudColorsBorder = [];
+        var whiteColors = [];
+        for (i = 0; i < a.length; i++) {
+            const r = Math.floor(Math.random() * 240);
+            const g = Math.floor(Math.random() * 240);
+            const b = Math.floor(Math.random() * 240);
+            backgroudColors.push(
+                "rgba(" + r + "," + g + "," + b + "," + o + ")"
+            );
+            backgroudColorsBorder.push(
+                "rgba(" + r + "," + g + "," + b + "," + "1)"
+            );
+            whiteColors.push("rgba(" + 255 + "," + 255 + "," + 255 + "," + "0.1)")
+        }
+        return [backgroudColors, backgroudColorsBorder, whiteColors];
+    }
+
+
+
+    // chart Data
+    color = colorGen(deptLabelsOffers,0.4);
+    const offerData = {
+        labels: deptLabelsOffers,
+        datasets: [
+            {
+                label: "All Offers",
+                data: num_of_offers_per_dept,
+                backgroundColor: color[0],
+                borderColor: color[1],
+                borderWidth: 1.5,
+            },
+        ],
+    };
+
+    // Top recruiters
+    recruitColor = colorGen(companyLabels,0.6);
+    const recruitersData = {
+        labels: companyLabels,
+        datasets: [
+            {
+                label: "CSE",
+                data: num_of_offers_per_company,
+                backgroundColor: recruitColor[0],
+                borderColor: recruitColor[1],
+                borderWidth: 2,
+            },
+        ],
+    };
+
+    function getDarkColor() {
+        let r = Math.floor(Math.random() * 200);
+        let g = Math.floor(Math.random() * 200);
+        let b = Math.floor(Math.random() * 200);
+        return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+
+    //Timeline
+    const timelineLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const timelineData = {
+      labels: timelineLabels,
+      datasets: [{
+        label: 'ASE',
+        data: lineChartData[0],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'BT',
+        data: lineChartData[1],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'CH',
+        data: lineChartData[2],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'CSE',
+        data: lineChartData[3],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'CV',
+        data: lineChartData[4],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'ECE',
+        data: lineChartData[5],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'EEE',
+        data: lineChartData[6],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'EIE',
+        data: lineChartData[7],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'ETE',
+        data: lineChartData[8],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'IEM',
+        data: lineChartData[9],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'ISE',
+        data: lineChartData[10],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+      {
+        label: 'ME',
+        data: lineChartData[11],
+        fill: false,
+        borderColor: getDarkColor(),
+        tension: 0.1
+      },
+
+    ]
+    };
+
+
+
+
+    pieColor = colorGen(deptLabelsStudents,0.2);
+    const pieData = {
+        labels: deptLabelsStudents,
+        datasets: [
+            {
+                label: "Students",
+                data: num_of_students_per_dept,
+                backgroundColor: pieColor[0],
+                borderColor: pieColor[1],
+                borderWidth: 0.75,
+            },
+        ],
+    };
+
+    // Chart Config
+    const config = {
+        type: "bar",
+        data: offerData,
+        options: {
+            plugins: {
+                legend: {
+                    onClick:(evt,legendItem,legend)=>{
+                        //console.log(evt)
+                        const index = legend.chart.data.labels.indexOf(legendItem.text)
+                        legend.chart.toggleDataVisibility(index)
+                        legend.chart.update()
+                    },
+                    labels:{
+                        generateLabels:(chart)=>{
+                            let visibility = [];
+                            for(let i=0;i<chart.data.labels.length;i++){
+                                if(chart.getDataVisibility(i)===true){
+                                    visibility.push(false)
+                                }else{
+                                    visibility.push(true);
+                                }
+                            };
+                            console.log(chart);
+                            return chart.data.labels.map(
+                                (label,index)=>({
+                                    text:label,
+                                    strokeStyle: chart.data.datasets[0].borderColor[index],
+                                    fillStyle:chart.data.datasets[0].backgroundColor[index],
+                                    hidden:visibility[index],
+                                })
+                            )
+                        }
+                    }
+
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+
+        },
+
+    };
+
+    // Top recruiters Config
+    const recruitersconfig = {
+        type: "bar",
+        data: recruitersData,
+        options: {
+            plugins: {
+                legend: {
+                    onClick:(evt,legendItem,legend)=>{
+                        //console.log(evt)
+                        const index = legend.chart.data.labels.indexOf(legendItem.text)
+                        legend.chart.toggleDataVisibility(index)
+                        legend.chart.update()
+                    },
+                    labels:{
+                        generateLabels:(chart)=>{
+                            let visibility = [];
+                            for(let i=0;i<chart.data.labels.length;i++){
+                                if(chart.getDataVisibility(i)===true){
+                                    visibility.push(false)
+                                }else{
+                                    visibility.push(true);
+                                }
+                            };
+                            console.log(chart);
+                            return chart.data.labels.map(
+                                (label,index)=>({
+                                    text:label,
+                                    strokeStyle: chart.data.datasets[0].borderColor[index],
+                                    fillStyle:chart.data.datasets[0].backgroundColor[index],
+                                    hidden:visibility[index],
+                                })
+                            )
+                        }
+                    }
+
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+
+        },
+
+    };
+
+    //Line chart config
+    const timelineConfig = {
+      type: 'line',
+      data: timelineData,
+    };
+
+
+
+    // Pie chart config
+    const pieconfig = {
+        type: "pie",
+        data: pieData,
+        options: {
+            plugins: {
+                legend: {
+                    onClick:(evt,legendItem,legend)=>{
+                        //console.log(evt)
+                        const index = legend.chart.data.labels.indexOf(legendItem.text)
+                        legend.chart.toggleDataVisibility(index)
+                        legend.chart.update()
+                    },
+                    labels:{
+                        generateLabels:(chart)=>{
+                            let visibility = [];
+                            for(let i=0;i<chart.data.labels.length;i++){
+                                if(chart.getDataVisibility(i)===true){
+                                    visibility.push(false)
+                                }else{
+                                    visibility.push(true);
+                                }
+                            };
+                            console.log(chart);
+                            return chart.data.labels.map(
+                                (label,index)=>({
+                                    text:label,
+                                    strokeStyle: chart.data.datasets[0].borderColor[index],
+                                    fillStyle:chart.data.datasets[0].backgroundColor[index],
+                                    hidden:visibility[index],
+                                })
+                            )
+                        }
+                    }
+
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+
+        },
+
+    };
+
+    //Render Chart variable
+    var myChart = new Chart(document.getElementById("myChart"), config);
+    var myPieChart = new Chart(document.getElementById("myPieChart"), pieconfig);
+    var myRecruitChart = new Chart(document.getElementById("myRecruitChart"),recruitersconfig);
+    var myLineChart = new Chart(document.getElementById("myLineChart"),timelineConfig);
+
+    //Handle Change Event
+
+    const selectBox = document.getElementById("selectBox");
+    selectBox.addEventListener("change", changeGraph);
+    const selectBranchBox = document.getElementById("selectBranchBox");
+    selectBranchBox.addEventListener("change", changeRecruitersGraph);
+    const selectOfferType2 = document.getElementById("selectBox2")
+    selectOfferType2.addEventListener("change", changeRecruitersGraph);
+
+    function changeGraph() {
+        $.ajax({
+            url: '/statistics',
+            type: 'POST',
+            data: {
+                toggle: selectBox.options[selectBox.selectedIndex].value
+            },
+            success: function (response) {
+                let dat = $.parseJSON(response)
+                console.log(dat)
+                labels = [], num_of_offers_per_dept =[];
+                for(var i in dat){
+                    labels.push(dat[i][0])
+                    num_of_offers_per_dept.push(dat[i][1])
+                    myChart.data.datasets[0].data = num_of_offers_per_dept;
+                    myChart.data.datasets[0].label = $("#selectBox :selected").text();
+                    myChart.update();
+                }
+            },
+            error: function (response) {
+            }
+        });
+    }
+    function changeRecruitersGraph() {
+        $.ajax({
+            url: '/topRecruiters',
+            type: 'POST',
+            data: {
+                branchToggle: selectBranchBox.options[selectBranchBox.selectedIndex].value,
+                offerType: selectOfferType2.options[selectOfferType2.selectedIndex].value
+            },
+            success: function (response) {
+                let dat = $.parseJSON(response)
+                console.log(dat)
+                companyLabels = [], num_of_offers_per_company =[];
+                for(var i in dat){
+                    companyLabels.push(dat[i][0])
+                    num_of_offers_per_company.push(dat[i][1])
+                    myRecruitChart.data.labels = companyLabels;
+                    myRecruitChart.data.datasets[0].data = num_of_offers_per_company;
+                    myRecruitChart.data.datasets[0].label = $("#selectBranchBox :selected").text();
+                    myRecruitChart.update();
+                }
+            },
+            error: function (response) {
+            }
+        });
+    }
+</script>
+
+{% endblock %} {% block script %} {% endblock %}

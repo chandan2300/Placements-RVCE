@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap');
+.chartBox {
+    margin: auto;
+    width: 1000px;
+    /* height: 300px; */
+    padding: 20px 20px 20px;
+}
+
+.recruitChartBox{
+    margin: auto;
+    width: 1000px;
+    padding: 30px 20px 20px;  
+}
+.lineChartBox{
+    margin: auto;
+    width: 1000px;
+    padding: 30px 20px 20px;  
+}
+
+
+.piechartBox {
+    margin: auto;
+    width: 700px;
+    /* height: 300px; */
+    padding: 30px 20px 20px;
+}
+
+.topRecruiters{
+    margin: 100px 100px 10px;
+    height: 85vh;
+    text-align: center;
+    box-shadow: 0px 0px 50px 20px rgb(0 0 0 / 17%), 0px 0px 13px 0px rgb(0 0 0 / 19%);
+    padding: 50px 50px 30px;
+}
+
+
+.lineChartDiv{
+    margin: 100px 100px 10px;
+    text-align: center;
+    box-shadow: 0px 0px 50px 20px rgb(0 0 0 / 17%), 0px 0px 13px 0px rgb(0 0 0 / 19%);
+    padding: 10px 50px 30px;
+}
+
+.numofoffers{
+    text-align: center;
+    height: 85vh;
+    background: linear-gradient(180deg, #ffffff, #a8c4d7);
+}
+.num_of_students{
+    text-align: center;
+    padding: 20px 0;
+    background: linear-gradient(180deg, #ffffff, #6a698f);
+}
+
+.chart-heading{
+    margin: auto;
+    font-size: 30px;
+    font-family: 'Ubuntu Mono', monospace;
+    color: black;
+    text-shadow: 
+     0 2px 1px #c8c8c8, 
+  -1px 3px 1px #cbcbcb, 
+  -2px 5px 1px #d2d2d2, 
+  -3px 7px 1px #d5d5d5,
+  -4px 9px 1px #e2e2e2,
+ -5px 11px 1px #e6e6e6,
+ -6px 13px 1px #eaeaea,
+ -7px 15px 1px #efefef;
+}
+
+.chart-heading:hover{
+    cursor: pointer;
+    text-shadow: 
+    0 2px 1px #c2c2c2,
+ -1px 3px 1px #c8c8c8, 
+ -2px 5px 1px #cbcbcb, 
+ -3px 7px 1px #d2d2d2,
+ -4px 9px 1px #d5d5d5,
+-5px 11px 1px #e2e2e2,
+-6px 13px 1px #e6e6e6,
+-7px 15px 1px #eaeaea,
+-8px 17px 1px #efefef;
+}
+
+.chart-toggle1{
+    border: none;
+    background-color: #0064e8;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 10px;
+    transition: background-color 0.5s;
+}
+.chart-toggle1:hover{
+    background-color: #003375;
+    cursor: pointer;
+}
+
+.chart-toggle{
+    border: none;
+    background-color: #0064e8;
+    color: white;
+    margin-top: 5px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 10px;
+    transition: background-color 0.5s;
+}
+
+.chart-toggle:hover{
+    background-color: #003375;
+    cursor: pointer;
+}
+
+.placement-stat{
+    background: linear-gradient(45deg, #c793c6, #060e3c);
+    /* background: linear-gradient(45deg, #49a09d, #5f2c82); */
+    height: 900px;
+}
+
+
+
+
+table {
+    position: relative;
+    margin: auto;
+    top: 80px;
+	width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+th,
+td {
+    text-align: center;
+	padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
+}
+th{
+    background-color: rgba(255, 255, 255, 0.078);
+
+}
+tr{
+    border: 0;
+}
+
+tr:hover{
+    background-color: rgba(255, 255, 255, 0.057);
+
+}
+
+thead th {
+    background-color: rgba(255, 255, 255, 0) ;
+	}
+.chart-heading-pstat{
+    position: relative;
+    top: 50px;
+    font-weight: bold;
+    text-align: center;    
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.black-lives-matter {
+    font-size: 5vw;
+    line-height: 6vw;
+    text-align: center;
+    margin: 0;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 900;
+    background: url(https://images.unsplash.com/photo-1605478264999-8d1cd66e9c78?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGFic3RyYWN0JTIwYmxhY2t8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60);
+    background-size: 40%;
+    background-position: 50% 50%;
+    -webkit-background-clip: text;
+    color: rgba(0,0,0,0.08);
+    animation: zoomout 3s ease 500ms forwards;
+  }
+
+.black-lives-matter1 {
+  font-size: 5vw;
+  line-height: 6vw;
+  margin: 0;
+  text-align: center;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 900;
+  background: url(https://images.unsplash.com/photo-1506259091721-347e791bab0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGFic3RyYWN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60
+  );
+  background-size: 40%;
+  background-position: 50% 50%;
+  -webkit-background-clip: text;
+  color: rgba(0,0,0,0.08);
+  animation: zoomout 3s ease 500ms forwards;
+}
+@keyframes zoomout {
+  from {
+    background-size: 40%;
+  }
+  to {
+    background-size: 10%;
+  }
+}
