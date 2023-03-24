@@ -2,7 +2,7 @@
 flask run
 rvce@1234
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wWDMmJrxVUk" > s</iframe>
+[![RVCE Placement](img/landing.png)](https://www.youtube.com/watch?v=wWDMmJrxVUk)
 
 reviews feature
 css
