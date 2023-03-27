@@ -13,6 +13,8 @@ import sqlite3
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from transformers import pipeline
+import urllib.request
+import json
 
 # Jobs, Resume Analysis
 from flask_wtf import FlaskForm
@@ -462,34 +464,48 @@ def timeline():
         branches = request.form['branches']
         stipendCtc = request.form['stipendCtc']
         date = request.form['date']
-        company = yf.Ticker(companySymbol)
-        info = company.info
+        events = db.execute('SELECT * FROM drive ORDER BY date(date); ')
+        allevents = events.fetchall()
+
+        if not companyName or not companySymbol or not offerType or not semester or not branches or not stipendCtc or not date:
+            return render_template('timeline.html', user = user, events = allevents, submiterror = "Enter all details")    
+
+        # send a request to the Yahoo Finance API to fetch the summary profile data for the stock symbol
+        url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{companySymbol}?modules=summaryProfile"
+        response = urllib.request.urlopen(url)
+
+        # read the response and decode the JSON data
+        compdata = response.read().decode("utf-8")
+        parsed_data = json.loads(compdata)
+
+        comp = parsed_data["quoteSummary"]['result'][0]['summaryProfile']
+
         try:
-            website = info['website']
+            website = comp['website']
         except:
             website = 'www.google.com'
         try:
-            summary = ".".join(info['longBusinessSummary'].split(".")[:2]) + "."
+            summary = ".".join(comp['longBusinessSummary'].split(".")[:2]) + "."
         except:
             summary = ''
         try:
-            location = info['state'] + ', ' + info['country']
+            location = comp['state'] + ', ' + comp['country']
         except:
             location = ''
         try:
-            employees = info['fullTimeEmployees']
+            employees = comp['fullTimeEmployees']
         except:
             employees = ''
         try:
-            sector = info['sector']
+            sector = comp['sector']
         except:
             sector = ''
         try:
-            industry = info['industry']
+            industry = comp['industry']
         except:
             industry = ''
         try:
-            logo_url = info['logo_url']
+            logo_url = 'https://logo.clearbit.com/' + companyName.lower() + '.com'
         except:
             logo_url = ''
 

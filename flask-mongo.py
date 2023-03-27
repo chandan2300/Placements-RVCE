@@ -9,10 +9,9 @@ from transformers import pipeline
 
 
 app = Flask(__name__)
-client = MongoClient("mongodb+srv://placement_stats:rvce1234@cluster0.vu9p3fh.mongodb.net/placement?retryWrites=true&w=majority",tls=True,tlsAllowInvalidCertificates=True)
+client = MongoClient("mongodb://localhost:27017",tls=True,tlsAllowInvalidCertificates=True)
 mongo_db = client.get_database()
-test = mongo_db.test
-
+test = mongo_db.Reviews
 nlp = pipeline("sentiment-analysis")
 
 

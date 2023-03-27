@@ -1247,8 +1247,6 @@ label {
     position: absolute;
     left: 0;
     bottom: 0;
-    background: #eef1fa;
-    background: linear-gradient(to bottom, #eef1fa, rgba(238, 241, 250, 0));
 }
 .features-wrap {
     display: flex;

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../feature/userSlice";
+import logo from './rvce-discuss.png';
 
 function Header() {
   const user = useSelector(selectUser);
@@ -47,7 +48,8 @@ function Header() {
         <div className="header-left">
           <Link to="/">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Stack_Overflow_logo.svg/220px-Stack_Overflow_logo.svg.png"
+              // src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Stack_Overflow_logo.svg/220px-Stack_Overflow_logo.svg.png"
+              src={logo}
               alt="logo"
             />
           </Link>
@@ -55,7 +57,6 @@ function Header() {
             
           </a> */}
 
-          <h3>Products</h3>
         </div>
         <div className="header-middle">
           <div className="header-search-container">

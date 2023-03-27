@@ -101,9 +101,15 @@
         <input type="submit" id="submit" value="Submit" class="submit-button">
       </form>
     </div>
+
+    <p class="submiterror">{% if submiterror %} {{ submiterror }} {% endif %}</p>
+
   </section>
   {% endif %}
 <script>
+            setTimeout(function() { $('.submiterror').fadeOut();}, 5500);
+
+
     function getDarkColor() {
     var color = '#';
     for (var i = 0; i < 6; i++) {

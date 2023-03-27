@@ -125,6 +125,14 @@ h2 {
     transform: translateX(-50%);
     animation: fillTop 2s forwards 4s ease-in-out;
 }
+
+.submiterror{
+    size: 50px;
+    padding-top: 100px;
+    color: red;
+    text-align: center;
+}
+
 .timeline__event__icon:after {
     content: "";
     width: 100%;
