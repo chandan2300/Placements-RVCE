@@ -11,95 +11,20 @@
 5. To get the discussion forum running, first install the node modules needed by running ```npm -i``` inside Discussion forum directory.
 6. Run ```npm start``` inside both the backend and frontend folder to get the forum discussion page running.
 
-reviews feature
-css
-multiple charts
+## The following are a few snapshots of the application:
 
-# Knowledge Graph web application using Spring Boot and Neo4J
-
-<p align="center"><img src="src/main/resources/static/landing.gif"/></p>
-
-The following prospects are handled by the application:
-
- > Update Weaver and Retailer transactions
-
- > Analyse product stock
-
- > Track company profits through visualizations
- 
- > Devise effective strategies
-
-## What you need
- [JDK](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html) 1.8+ 
-
-  [Gradle](https://gradle.org)  4+ or  [Maven](https://maven.apache.org)  3.2+
-
-## Run the application
-```./mvnw spring-boot:run```
-
-### Routes
-```/query```
-
-```/patch```
-
-```/register```
-
-## Products
-
-- The products section allows us to query the real time stock of products in the company.
-- Provision is given for manually selecting the required product type, category and weave.
-- State wise distribution of the product stocks is available by selecting the split toggle filter.
-
-![Products](src/main/resources/static/2.png)
-
-## Statistics
-
-- Queries like which type of product was bought by the retailer and in which month can be answered using the statistics query.
-- Product specifications can be used for filtering of data.
-- An example present below shows the result of querying which type of product was sold in the monsoon and spring seasons and in which months specifically.
-- Bar graphs shows how much of each type is sold monthwise.
-
- ![Stats](src/main/resources/static/3.png)
-
- <p align="center"><img src="src/main/resources/static/stat.gif"/></p>
-
-## Transactions
-
-- Fetching transaction details can be done by using the transactions form.
-- Handles both retailer and weaver transactions dynamically.
-- Transactions can be filtered based on the month, state and the product sold/ bought.
-- Special line graphs for selected weavers/ retailers showing their transactions are rendered.
-
- ![Transactions](src/main/resources/static/4.png)
-
-<p align="center"><img src="src/main/resources/static/trans.gif"/></p>
-
- ![Transactions](src/main/resources/static/5.png)
-
-## Updating the Graph Database
-
- - When a new retailer or weaver is registered inside the company, his details are encapsulated into an instance of Retailer or Weaver and inserted into the database.
- -  This real time updation of the graph database causes the newly entered data to be visible while running a new query. 
- - Similarly, every new transaction recorded across all centers of the company is inserted into the database by making use of our APIs.
-
-<p align="center"><img src="src/main/resources/static/update.gif"/></p>
-
-## Visualizing the Graph
-### 1. Weavers
-
-- Weavers are customers who sell products to the company. 
-- The below graph shows one such product (orange nodes) which has been sold (represented by the edge) to the company by a number of weavers (purple nodes). 
-- The details of each transaction is stored as that respective edge’s attributes.
-
- ![Weavers](src/main/resources/static/6.png)
-
-<p align="center"><img src="src/main/resources/static/weavers.gif"/></p>
-
-### 2. Retailers
-
-- Retailers are customers who buy products from the company. 
-- The graph follows a similar structure to that of weavers with all the products bought by a retailer linked to that retailer node.
-
- ![Retailers](src/main/resources/static/7.png)
-
-<p align="center"><img src="src/main/resources/static/Retailers.gif"/></p>
+<img width="1440" alt="Screenshot 2023-03-27 at 9 21 59 PM" src="https://user-images.githubusercontent.com/78087562/228006798-dc8178a7-3a44-4376-b891-643741fb495f.png">
+<img width="989" alt="Screenshot 2023-03-27 at 10 04 19 PM" src="https://user-images.githubusercontent.com/78087562/228007738-1ac635a1-0794-4c29-9c9d-88c32d14d945.png">
+<img width="989" alt="Screenshot 2023-03-27 at 10 04 08 PM" src="https://user-images.githubusercontent.com/78087562/228007744-07e2a70b-b24a-474a-9d4a-944184751546.png">
+<img width="989" alt="Screenshot 2023-03-27 at 10 04 29 PM" src="https://user-images.githubusercontent.com/78087562/228007728-4a31d361-7980-4e53-973d-ceb269c7699c.png">
+<img width="989" alt="Screenshot 2023-03-27 at 10 04 38 PM" src="https://user-images.githubusercontent.com/78087562/228007706-722813f5-202f-4e5a-82c5-da298cd46f6e.png">
+<img width="989" alt="Screenshot 2023-03-27 at 10 04 57 PM" src="https://user-images.githubusercontent.com/78087562/228007654-fb5f1f56-d5f8-477b-977a-b3749cff0db3.png">
+<img width="994" alt="Screenshot 2023-03-27 at 10 05 15 PM" src="https://user-images.githubusercontent.com/78087562/228007010-140b0174-2190-49e4-894a-78be7187646e.png">
+<img width="996" alt="Screenshot 2023-03-27 at 10 03 17 PM" src="https://user-images.githubusercontent.com/78087562/228007751-f65d3ef8-3eb2-46e0-9adc-8939f75b5934.png">
+<img width="997" alt="Screenshot 2023-03-27 at 10 03 03 PM" src="https://user-images.githubusercontent.com/78087562/228007754-aee80fd2-111e-4a2b-af2f-fab3b4bcb15e.png">
+<img width="996" alt="Screenshot 2023-03-27 at 10 03 26 PM" src="https://user-images.githubusercontent.com/78087562/228007748-022fb986-10b9-4528-822f-c256976880f7.png">
+<img width="994" alt="Screenshot 2023-03-27 at 10 05 46 PM" src="https://user-images.githubusercontent.com/78087562/228006995-2a8148a4-7327-4327-9913-707c5c081023.png">
+<img width="994" alt="Screenshot 2023-03-27 at 10 05 32 PM" src="https://user-images.githubusercontent.com/78087562/228007000-abd3d075-87f4-4451-8106-54c9e29421b2.png">
+<img width="994" alt="Screenshot 2023-03-27 at 10 06 05 PM" src="https://user-images.githubusercontent.com/78087562/228006982-df86a9c5-ee98-4560-ae6c-74c6aea740bc.png">
+ <img width="994" alt="Screenshot 2023-03-27 at 10 06 12 PM" src="https://user-images.githubusercontent.com/78087562/228006965-4e536c80-a447-49a8-b5ce-2f005b126672.png">
+<img width="994" alt="Screenshot 2023-03-27 at 10 06 20 PM" src="https://user-images.githubusercontent.com/78087562/228006888-97c4ee6f-e16f-44fa-b6a7-3d62760aefa1.png">
