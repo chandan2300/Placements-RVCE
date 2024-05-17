@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='offer.css')}}" type = "text/css">    
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" type = "text/css">
+    {% endblock %}
+
+
+    {% block title %}
+        Update Offer
+    {% endblock %}
+
+    {% block main %}
+    <div style=" padding: 0 200px 30px; margin-top: -25px;">
+        {% if user %}
+        <h3 class="m-2" style="color: #c7c7c7;">
+          <a href="{{ url_for('dashboard')}}"><button class="btn-menu" style="font-size: 20px; padding: 15px 30px;">Dashboard</button></a>
+          <a href="{{ url_for('statistics')}}"><button class="btn-menu" style="font-size: 20px; padding: 15px 30px;">Statistics</button></a>
+          {% if user['name'] == 'Placement Head' %}
+          <a href="{{ url_for('register')}}"><button class="btn-menu" style="font-size: 20px; padding: 15px 30px;" >Register</button></a>
+          {% endif %}
+          <span style="float: right; padding-top: 6px;"> {{user['name']}}   </span></h3>
+        {% endif %}
+      </div>
+
+
+      <section class="offer-form">
+        <div class="chart-heading-offer" style="margin-top: -10px;">Update Offer</div>
+
+        <div class="container1">
+          <form id="survey-form1" action="/updateoffers" method="POST">
+            <div class="input-box1">
+              <label for="usn" class="title-label1" >USN</label>
+              <input type="text" id="usn" class="input-text1" name="usn" value = "{{single_offer['usn']}}" readonly>
+            </div>
+            <div class="input-box1">
+                <label for="name" class="title-label1" >Name</label>
+                <input type="text" id="name" class="input-text1" name="name" value = "{{single_offer['name']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="dept" class="title-label1" >Department</label>
+                <input type="text" id="dept" class="input-text1" name="dept" value = "{{single_offer['dept']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="gender" class="title-label1" >Gender</label>
+                <input type="text" id="gender" class="input-text1" name="gender" value = "{{single_offer['gender']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="compName" class="title-label1" >Company Name</label>
+                <input type="text" id="compName" class="input-text1" name="compName" value = "{{single_offer['compName']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="offerType" class="title-label1" >Offer Type</label>
+                <input type="text" id="offerType" class="input-text1" name="offerType" value = "{{single_offer['offerType']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="ctc" class="title-label1" >CTC</label>
+                <input type="number" step='0.01' id="ctc" class="input-text1" name="ctc" value = "{{single_offer['ctc']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="jobProfile" class="title-label1" >Job Profile</label>
+                <input type="text"  id="jobProfile" class="input-text1" name="jobProfile" value = "{{single_offer['jobProfile']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="category" class="title-label1" >Category</label>
+                <input type="text"  id="category" class="input-text1" name="category" value = "{{single_offer['category']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="remarks" class="title-label1" >Remarks</label>
+                <input type="text"  id="remarks" class="input-text1" name="remarks" value = "{{single_offer['remarks']}}" >
+            </div>
+            <div class="input-box1">
+                <label for="offerDate" class="title-label1" >Offer Date</label>
+                <input type="text"  id="offerDate" class="input-text1" name="offerDate" value = "{{single_offer['offerDate']}}" >
+            </div>
+            <input type="submit" id="submit" value="Submit" class="submit-button">
+          </form>
+        </div>
+      </section>
+    {% endblock %}
+
+    {% block script %}
+    {% endblock %}

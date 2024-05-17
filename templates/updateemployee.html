@@ -1,0 +1,98 @@
+{% from "showlinks.html" import show_links, showsocialmedialinks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLASK-CRUD_APP_UPDATE_EMPLOYEE_page.</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" type = "text/css">
+</head>
+<body>
+      <div class="parent">
+        <div class="child child1">
+            <h1 class="text-center"><i>LOGO</i></h1>
+        </div>
+        <div class="child child2">
+          {{ showsocialmedialinks() }}
+        </div>
+        <div class="child child3">
+          {{ show_links() }}
+      </div>
+
+        <div class="child child4">
+            <h3 class="m-2">Update Employee Page</h3>
+        </div>
+
+        <div class="child child5" style="color:rgb(0, 75, 93);">
+          {% if user %}
+          <h3 class="m-2"><i>User : {{user['name']}}</i></h3>
+          {% endif %}
+        </div>
+
+        <div class="child child6left">
+            <div class="circledivleft">
+                <div class="circleleft">
+                </div>
+              </div>
+        </div>
+
+        <div class="child child6 container" style="color:rgb(0, 75, 93);">
+            <ul class="nav nav-tabs nav-fill mb-3">
+                <li class="nav-item">
+                  <a class="nav-link" style=" background-color:rgb(0, 75, 93); color:whitesmoke;"  href="dashboard.html">View All Employee</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style=" background-color:rgb(0, 75, 93); color:whitesmoke;" href="addnewemployee.html">Add New Employee</a>
+                </li>
+              </ul>
+              <div class="table-responsive-lg caption-top">
+                <caption><h3>UPDATE EMPLOYEES</h3></caption>
+                 <hr>
+                 {% if single_emp %}
+                <form class="p-3" action="/updateemployee" method="POST">
+                  <div class="mb-2">
+                    <label for="empid" class="form-label">EMP ID</label>
+                    <input type="text" class="form-control" id="empid" value = "{{single_emp['empid']}}" name="empid" readonly>
+                  </div>
+                    <div class="mb-2">
+                      <label for="name" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="name" value = "{{single_emp['name']}}" name = "name">
+                    </div>
+                    <div class="mb-2">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="text" class="form-control" id="email" value= "{{single_emp['email']}}" name="email">
+                    </div>
+                    <div class="mb-2">
+                        <label for="name" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone" value="{{single_emp['phone']}}" name="phone">
+                      </div>
+                      <div class="mb-2">
+                        <label for="email" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="phone" value = "{{single_emp['address']}}" name = "address">
+                      </div>
+                      {% endif %}
+            <button type="submit" class="btn text-light m-3" style="background-color:rgb(0, 75, 93);">Update Employee</button>
+                  </form>
+              </div>
+        </div>
+
+        <div class="child child6right">
+            <div class="circledivright">
+                <div class="circleright">
+                </div>
+            </div>
+        </div>
+ 
+        <div class="child child7 fixed-bottom" style="background-color:rgb(0, 75, 93); color:whitesmoke;">
+            <p class="p-3 text-center">copyright &copy; Developed and Designed by Gurupreeth Singh , Email :- igurupreeth@gmail.com</p>
+        </div>
+      </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>
