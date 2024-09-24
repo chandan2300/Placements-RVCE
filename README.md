@@ -1,5 +1,7 @@
+# Contributors
+1. Chandan Kasamsetty
+2. Harsha HL
 # RVCE Placement Management System
-
 [![RVCE Placement](img/a.gif)](https://www.youtube.com/watch?v=wWDMmJrxVUk)
 
 ## Steps to Run
